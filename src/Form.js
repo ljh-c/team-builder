@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-function Form({ memberData, setMemberData, handleSubmit }) {
-  
+function Form({ 
+    memberData, setMemberData, 
+    handleSubmit, memberToEdit 
+  }) {
+
+  useEffect(() => {
+    return setMemberData({...memberToEdit})
+  }, [memberToEdit]);
+
   const handleInputChange = event => {
     setMemberData({
       ...memberData, 
@@ -41,7 +48,7 @@ function Form({ memberData, setMemberData, handleSubmit }) {
       </label>
 
       <label>
-        Admin: <input type="checkbox" name="isAdmin" onChange={handleInputChange} value={memberData.isAdmin}/>
+        Admin: <input type="checkbox" name="isAdmin" checked={memberData.checked} onChange={handleInputChange} value={memberData.isAdmin}/>
       </label>
 
       <button>Submit</button>

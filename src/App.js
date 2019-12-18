@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import './App.css';
 import Form from './Form';
+import MemberCard from './MemberCard';
 
 function App() {
-  const [roster, setRoster] = useState([]);
+  const [roster, setRoster] = useState([{
+    name: 'Lillian',
+    password: 'moo',
+    role: 'Frontend Engineer'
+  }]);
 
   const [memberData, setMemberData] = useState({
     name: '', 
@@ -12,25 +17,37 @@ function App() {
     isAdmin: false
   });
 
+  const [memberToEdit, setMemberToEdit] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
+
   const handleSubmit = event => {
     event.preventDefault();
-    setRoster([...roster, memberData]);
-      
+    if (!isEditing) {
+      setRoster([...roster, memberData]);
+    }
+    setMemberData({
+      name: '', 
+      password: '', 
+      role: '', 
+      isAdmin: false
+    });
+    setMemberToEdit({});
+    setIsEditing(false);
   };
 
   return (
     <div className="App">
       <h1>Add Team Member</h1>
-      <Form memberData={memberData} setMemberData={setMemberData} handleSubmit={handleSubmit} />
+      <Form 
+        memberData={memberData} 
+        setMemberData={setMemberData} 
+        handleSubmit={handleSubmit} 
+        memberToEdit={memberToEdit} 
+      />
       <h2>Team</h2>
       {roster.map((member, index) => {
         return (
-          <div key={index}>
-            <p>{member.name}</p>
-            <p>{member.password}</p>
-            <p>{member.role}</p>
-            {member.hasOwnProperty('isAdmin') ? <p>admin</p> : null}
-          </div>
+          <MemberCard key={index} member={member} setMemberToEdit={setMemberToEdit} setIsEditing={setIsEditing} />
         );
       })}
     </div>
