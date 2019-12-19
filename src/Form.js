@@ -6,7 +6,7 @@ function Form({
   }) {
 
   useEffect(() => {
-    return setMemberData({...memberToEdit})
+    setMemberData({...memberToEdit});
   }, [memberToEdit]);
 
   const handleInputChange = event => {
