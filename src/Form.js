@@ -12,7 +12,8 @@ function Form({
   const handleInputChange = event => {
     setMemberData({
       ...memberData, 
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      isAdmin: event.target.checked
     });
   };
 
@@ -30,9 +31,9 @@ function Form({
       <label>
         Password: <input 
           type="text" 
-          name="password" 
+          name="email" 
           onChange={handleInputChange} 
-          value={memberData.password}/>
+          value={memberData.email}/>
       </label>
 
       <label>

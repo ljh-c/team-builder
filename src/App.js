@@ -6,19 +6,20 @@ import MemberCard from './MemberCard';
 function App() {
   const [roster, setRoster] = useState([{
     name: 'Lillian',
-    password: 'moo',
+    email: 'moo',
     role: 'Frontend Engineer',
-    id: 0
+    isAdmin: false
   }]);
 
   const [memberData, setMemberData] = useState({
     name: '', 
-    password: '', 
+    email: '', 
     role: '', 
     isAdmin: false
   });
 
   const [memberToEdit, setMemberToEdit] = useState({});
+  
   const [isEditing, setIsEditing] = useState(false);
 
   const handleSubmit = event => {
@@ -34,7 +35,7 @@ function App() {
 
     setMemberData({
       name: '', 
-      password: '', 
+      email: '', 
       role: '', 
       isAdmin: false
     });
@@ -46,14 +47,13 @@ function App() {
     setMemberData({
       ...memberData,
       name: memberToEdit.name,
-      password: memberToEdit.password,
+      email: memberToEdit.email,
       role: memberToEdit.role,
+      isAdmin: memberToEdit.isAdmin
     });
     
 
     let newRos = roster.map(member => {
-      console.log(member.id);
-      console.log(memberData.id);
       if (member.name === memberToEdit.name) {
         console.log('I found the edited member');
         return memberData;
@@ -78,7 +78,7 @@ function App() {
       <h2>Team</h2>
       {roster.map((member, index) => {
         return (
-          <MemberCard key={index} id={index} member={member} setMemberToEdit={setMemberToEdit} isEditing={isEditing} setIsEditing={setIsEditing} />
+          <MemberCard key={index} member={member} setMemberToEdit={setMemberToEdit} isEditing={isEditing} setIsEditing={setIsEditing} />
         );
       })}
     </div>

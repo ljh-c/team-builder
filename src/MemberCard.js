@@ -14,10 +14,10 @@ function MemberCard(props) {
     <Card>
       <CardBody>
         <CardTitle><h3>{props.member.name}</h3></CardTitle>
-        <CardSubtitle><p>{props.member.password}</p></CardSubtitle>
+        <CardSubtitle><p>{props.member.email}</p></CardSubtitle>
         <CardText>{props.member.role}</CardText>
         <button onClick={handleClick}>Edit</button>
-        {props.member.hasOwnProperty('isAdmin') ? <p>admin</p> : null}
+        {props.member.isAdmin ? <p>admin</p> : null}
       </CardBody>
     </Card>
   );
